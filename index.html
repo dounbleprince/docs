@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>WCX | API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,293 +210,1090 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#rest" class="toc-h1 toc-link" data-title="REST">REST</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#private" class="toc-h1 toc-link" data-title="Private">Private</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#place-a-new-order" class="toc-h2 toc-link" data-title="Place a New Order">Place a New Order</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#cancel-an-order" class="toc-h2 toc-link" data-title="Cancel an Order">Cancel an Order</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#list-orders" class="toc-h2 toc-link" data-title="List Orders">List Orders</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#fills" class="toc-h1 toc-link" data-title="Fills">Fills</a>
+          </li>
+          <li>
+            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+          </li>
+          <li>
+            <a href="#balances" class="toc-h1 toc-link" data-title="Balances">Balances</a>
+          </li>
+          <li>
+            <a href="#deposit-address" class="toc-h1 toc-link" data-title="Deposit Address">Deposit Address</a>
+          </li>
+          <li>
+            <a href="#public" class="toc-h1 toc-link" data-title="Public">Public</a>
+          </li>
+          <li>
+            <a href="#products" class="toc-h1 toc-link" data-title="Products">Products</a>
+          </li>
+          <li>
+            <a href="#ticker" class="toc-h1 toc-link" data-title="Ticker">Ticker</a>
+          </li>
+          <li>
+            <a href="#order-book" class="toc-h1 toc-link" data-title="Order Book">Order Book</a>
+          </li>
+          <li>
+            <a href="#trade-history" class="toc-h1 toc-link" data-title="Trade History">Trade History</a>
+          </li>
+          <li>
+            <a href="#candles" class="toc-h1 toc-link" data-title="Candles">Candles</a>
+          </li>
+          <li>
+            <a href="#websocket" class="toc-h1 toc-link" data-title="WebSocket">WebSocket</a>
+          </li>
+          <li>
+            <a href="#private-events" class="toc-h1 toc-link" data-title="Private Events">Private Events</a>
+          </li>
+          <li>
+            <a href="#order" class="toc-h1 toc-link" data-title="Order">Order</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#received" class="toc-h2 toc-link" data-title="Received">Received</a>
+                  </li>
+                  <li>
+                    <a href="#open" class="toc-h2 toc-link" data-title="Open">Open</a>
+                  </li>
+                  <li>
+                    <a href="#set" class="toc-h2 toc-link" data-title="Set">Set</a>
+                  </li>
+                  <li>
+                    <a href="#triggered" class="toc-h2 toc-link" data-title="Triggered">Triggered</a>
+                  </li>
+                  <li>
+                    <a href="#match" class="toc-h2 toc-link" data-title="Match">Match</a>
+                  </li>
+                  <li>
+                    <a href="#done" class="toc-h2 toc-link" data-title="Done">Done</a>
+                  </li>
+                  <li>
+                    <a href="#cancelled" class="toc-h2 toc-link" data-title="Cancelled">Cancelled</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#balance" class="toc-h1 toc-link" data-title="Balance">Balance</a>
+          </li>
+          <li>
+            <a href="#deposit" class="toc-h1 toc-link" data-title="Deposit">Deposit</a>
+          </li>
+          <li>
+            <a href="#public-events" class="toc-h1 toc-link" data-title="Public Events">Public Events</a>
+          </li>
+          <li>
+            <a href="#heartbeat" class="toc-h1 toc-link" data-title="Heartbeat">Heartbeat</a>
+          </li>
+          <li>
+            <a href="#ticker" class="toc-h1 toc-link" data-title="Ticker">Ticker</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#snapshot" class="toc-h2 toc-link" data-title="Snapshot">Snapshot</a>
+                  </li>
+                  <li>
+                    <a href="#event" class="toc-h2 toc-link" data-title="Event">Event</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#book" class="toc-h1 toc-link" data-title="Book">Book</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#snapshot" class="toc-h2 toc-link" data-title="Snapshot">Snapshot</a>
+                  </li>
+                  <li>
+                    <a href="#event" class="toc-h2 toc-link" data-title="Event">Event</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#trades" class="toc-h1 toc-link" data-title="Trades">Trades</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#snapshot" class="toc-h2 toc-link" data-title="Snapshot">Snapshot</a>
+                  </li>
+                  <li>
+                    <a href="#event" class="toc-h2 toc-link" data-title="Event">Event</a>
+                  </li>
+              </ul>
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://wcex.com/'>WCX</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+        <h1 id='rest'>REST</h1><h1 id='private'>Private</h1><h1 id='orders'>Orders</h1><h2 id='place-a-new-order'>Place a New Order</h2>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p><strong>Place a post-only limit order to sell 10 ETH at 0.04BTC.</strong></p>
+
+<p>Request</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PO"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9d335cce-d581-45f6-8efc-bdab3d61c6e2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PO"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"filled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511467005839.417"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>POST /new-order</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product</td>
+<td>A valid product</td>
+</tr>
+<tr>
+<td>side</td>
+<td>Can be <code>buy</code> or <code>sell</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>Can be <code>limit</code> (default), <code>market</code>, <code>stop</code>, or <code>stop-limit</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td>* Amount of base asset to buy or sell</td>
+</tr>
+<tr>
+<td>funds</td>
+<td>* Amount of counter asset to buy or sell</td>
+</tr>
+<tr>
+<td>price</td>
+<td>** Price of your order</td>
+</tr>
+</tbody></table>
+
+<p>* <code>funds</code> must be specified for <code>buy</code> <code>market</code> and <code>buy</code> <code>stop</code> orders. In all other cases, <code>size</code> must be specified. Only one of <code>funds</code> or <code>size</code> can be set.</p>
+
+<p>** Price can be ignored for <code>market</code> orders, but is required for all other order types. For <code>stop</code> orders, this is the price at which the stop order triggers.</p>
+
+<p>As an alternative to market orders, you can use limit orders with price set deep in the opposite book. This allows you to set a size in base asset and a price, which gives you an execution price guarantee.</p>
+
+<p>A list of products can be found by querying the <a href="#products"><code>/products</code></a> endpoint.</p>
+<h4 id='limit-order-parameters'>Limit order parameters</h4>
+<p>For limit orders, you can specify an execution policy condition. This parameter is optional.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>condition</td>
+<td>Can be <code>GTC</code> (default), <code>IOC</code>, or <code>PO</code></td>
+</tr>
+</tbody></table>
+
+<p><code>GTC</code> Good till cancelled orders will remain on the book until they&#39;re cancelled. This is the default order placement behavior.</p>
+
+<p><code>IOC</code> Immediate-or-cancel orders will only remove liquidity from the book. When submitted, the order will fill partially or fully and any outstanding amount that is not matched is cancelled, so that no part of the order appears on the book.</p>
+
+<p><code>PO</code> Post-only orders will only add liquidity to the book. If any part of the order results in taking liquidity, the order will be rejected and no part of it will execute.</p>
+<h4 id='stop-limit-order-parameters'>Stop-limit order parameters</h4>
+<p>For stop-limit orders, <code>limit_price</code> must be specified in addition to the default request parameters.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit_price</td>
+<td>The limit price of a stop-limit order</td>
+</tr>
+</tbody></table>
+<h3 id='order-lifecycle'>Order lifecycle</h3>
+<p>Your account must have sufficient balance to submit an order. An order that is successfully received by the matching engine will be marked as <strong>received</strong>. </p>
+
+<p>If any part of the order results in adding liquidity to the book, it will be marked as <strong>open</strong>. </p>
+
+<p>Stop orders do not appear on the book. A successfully submitted stop order will be marked as <strong>set</strong>.</p>
+
+<p>An order that is completely filled and off the book will be marked as <strong>done</strong>.</p>
+<h3 id='response'>Response</h3>
+<p>An order accepted by the matching engine will be assigned an order <code>id</code> present in the response.</p>
+
+<p><code>filled</code> specifies the amount, in base asset, that was matched as a result of your order.</p>
+
+<p><code>timestamp</code> is the time your order was received by the matching engine.</p>
+<h2 id='cancel-an-order'>Cancel an Order</h2>
+<blockquote>
+<p><strong>Cancel an order.</strong></p>
+
+<p>Request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9d335cce-d581-45f6-8efc-bdab3d61c6e2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9d335cce-d581-45f6-8efc-bdab3d61c6e2"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>POST /cancel-order</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the order to cancel</td>
+</tr>
+<tr>
+<td>product</td>
+<td>The product the order is open for</td>
+</tr>
+</tbody></table>
+
+<p>Providing <code>product</code> is optional, but it&#39;s recommended because it greatly speeds up the cancel operation by skipping the id-to-product lookup.</p>
+<h3 id='response'>Response</h3>
+<p>A <code>200</code> status with the <code>id</code> of the cancelled order.</p>
+
+<p>If an order could not be cancelled (if it has been already filled, does not exist, etc.), an error is returned.</p>
+<h2 id='list-orders'>List Orders</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b20265e7-8d28-476a-8758-c6113ad98c0b"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.34977543"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"funds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"filled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.053435"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511252206104.628"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b361e636-46cd-4a34-a532-d454c9e7b4b6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.52120565"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"funds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"filled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.053147"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511252184729.679"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>List your open orders. Both limit and stop orders are returned, ordered by submission time.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /orders</code></strong></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<p>You can optionally pass a <code>limit</code> query parameter to limit the number of orders returned. By default, 100 items are returned.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
 <th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>limit</td>
+<td>100</td>
+<td>Number of orders to return (max is 100)</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>E.g. <code>/orders?limit=50</code>.</p>
+<h3 id='keeping-track-of-your-order-states'>Keeping track of your order states</h3>
+<p>We recommend listening to streaming WebSocket order events to maintain an up-to-date view of your open orders. It&#39;s faster and in many cases more accurate than polling this endpoint, because an order&#39;s state may change between the time you make an HTTP request and receive a response.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
+<p>Polling this endpoint is highly discouraged.</p>
+<h3 id='response'>Response</h3>
+<p>An array of your open orders.</p>
+<h1 id='fills'>Fills</h1>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Response</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> 
+        </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31bf3a89-2a0a-40b0-9327-ec0a5cc3ce3c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77942322"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fee_maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00002000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fee_taker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00116913"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491.739"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7f66a16c-0b47-4bd6-8add-6b2c33366082"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.97422208"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.051323"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fee_maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00002500"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fee_taker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00146133"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"is_self_trade"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482127568.782"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<p>List your recent fills, ordered by fill time.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /fills</code></strong></p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>product</td>
+<td><em>all</em></td>
+<td>Limit fills returned to this product</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>100</td>
+<td>Number of orders to return (max is 100)</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td><em>N/A</em></td>
+<td>Return fills that occurred before this time</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>E.g. <code>/fills?product=LTC-BTC&amp;limit=50&amp;timestamp=1511481127561</code>.</p>
+<h3 id='keeping-track-of-your-fills'>Keeping track of your fills</h3>
+<p>We recommend listening to streaming WebSocket match events to maintain an up-to-date view of your fills. It&#39;s faster and more accurate than polling this endpoint.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>Polling this endpoint is highly discouraged.</p>
+<h3 id='response'>Response</h3>
+<p>An array of your recent fills.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
+<p><code>is_self_trade</code> is set to true if your fill results from a self-trade.</p>
+
+<p><code>is_taker</code> is set to <strong>true</strong> when your fill results in taking liquidity from the book. This field is set to true for self-trades.</p>
+<h1 id='transactions'>Transactions</h1>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Response</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1763b061c5ebb76371872d"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00002000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fee"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491.739"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1763b061c5ebb76371872e"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491.739"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a136c8e61c5ebb76369bb36"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88129031ad5650faa1e1f0e42829e1dcb7f75d069b9d44b8ade27a2d3ab868bd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deposit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511222409359.000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<p>List your transactions, ordered by time.</p>
+
+<p>A transaction is an entry in your account ledger that affects your account balance. It can be an external transfer, such as a deposit or withdrawal, or an internal transfer, such as a trade or a fee.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /transactions/:asset</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>asset</td>
+<td>Asset for which to return transactions</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
-<p>The Kittn API uses the following error codes:</p>
-
+<p><code>asset</code> is required. E.g. <code>BTC</code>, <code>LTC</code>, <code>ETH</code>, etc.</p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request sucks.</td>
+<td>type</td>
+<td>all</td>
+<td>(optional) Can be <code>all</code>, <code>deposit</code>, <code>withdraw</code>, <code>trade</code>, or <code>fee</code></td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>limit</td>
+<td>100</td>
+<td>Number of transactions to return (max is 100)</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>timestamp</td>
+<td><em>N/A</em></td>
+<td>Return transactions that occurred before this time</td>
 </tr>
 </tbody></table>
+
+<p>E.g. <code>/transactions/BTC?type=deposit&amp;limit=50&amp;timestamp=1511481127561</code>.</p>
+<h3 id='order-settlement'>Order settlement</h3>
+<p>There is a small window between an order being <strong>executed</strong> by the matching engine and <strong>settled</strong> by the post-trade system. <code>trade</code> and <code>fee</code> transactions appear once the order is settled.</p>
+<h3 id='response'>Response</h3>
+<p>An array of transactions on your account.</p>
+<h1 id='balances'>Balances</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"887.50070583"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"996.72128261"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45.16729606"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"91.33222695"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>List your balances, grouped by asset.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /balances/:asset(s)</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>asset(s)</td>
+<td>(optional) One or more comma-separated assets</td>
+</tr>
+</tbody></table>
+
+<p>Omitting <code>asset(s)</code> will return all balances on your account.</p>
+<h3 id='available-balance'>Available balance</h3>
+<p>Your available balance is equal to your total balance minus the amount that&#39;s been placed on hold.</p>
+
+<p>When you place an order, the amount used for the order is placed on hold until the order is filled or cancelled.</p>
+
+<p>When you request a withdrawal, the amount of the withdrawal is placed on hold until the withdrawal is processed or cancelled.</p>
+<h3 id='response'>Response</h3>
+<p>An array of balances on your account.</p>
+<h1 id='deposit-address'>Deposit Address</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1PAt5oKQGBRigFDY6fB2WgQTtQJNzFyTDr"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /deposit/:asset</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>asset</td>
+<td>The asset you want a deposit address for</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>A deposit address for the requested asset.</p>
+<h1 id='public'>Public</h1><h1 id='products'>Products</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"base_asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"counter_asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"minimum_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precision_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precision_base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precision_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTC-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"base_asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"counter_asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"minimum_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precision_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precision_base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precision_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>List products available to trade.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /products</code></strong></p>
+<h3 id='response'>Response</h3>
+<p>An array of products.</p>
+
+<p><code>minimum_value</code> represents the minimum amount, in counter asset, to place an order.</p>
+
+<p><code>precision_price</code> represents the maximum number of decimals tracked for this product&#39;s price. For example, a price precision of 6 means that a product&#39;s price is tracked up to the nearest 0.000001. Prices submitted with more decimals will be rounded to the nearest price precision.</p>
+<h1 id='ticker'>Ticker</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bid_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.00000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ask_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.22057678"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279492.542"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /ticker/:product</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product</td>
+<td>A valid product</td>
+</tr>
+</tbody></table>
+
+<p>Polling this endpoint is discouraged in favor of subscribing to WebSocket events.</p>
+<h1 id='order-book'>Order Book</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"bids"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.04"</span><span class="p">,</span><span class="w"> </span><span class="s2">"5.00000000"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.039465"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4.24022501"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"asks"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w"> </span><span class="s2">"9.22057678"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.051323"</span><span class="p">,</span><span class="w"> </span><span class="s2">"3.52460275"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get a list of open bid and ask levels for a product.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /book/:product</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product</td>
+<td>A valid product</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>100</td>
+<td>Number of orders, per side, to return (max is 100)</td>
+</tr>
+</tbody></table>
+
+<p>E.g. <code>/book/ETH-BTC?limit=50</code>.</p>
+
+<p>Polling this endpoint is discouraged in favor of subscribing to WebSocket events.</p>
+<h3 id='response'>Response</h3>
+<p>The current bids and asks for a product.</p>
+
+<p>Each item in the <code>bids</code> or <code>asks</code> array returned is an array consisting of the price, size, and number of orders open at this level.</p>
+<h1 id='trade-history'>Trade History</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31bf3a89-2a0a-40b0-9327-ec0a5cc3ce3c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77942322"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279492.417"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="s2">"7f66a16c-0b47-4bd6-8add-6b2c33366082"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="s2">"0.97422208"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1511482127569.335"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Get the latest trades for a product.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /trades/:product</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product</td>
+<td>A valid product</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>100</td>
+<td>Number of orders, per side, to return (max is 100)</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td><em>N/A</em></td>
+<td>Return trades that occurred before this time</td>
+</tr>
+</tbody></table>
+
+<p>E.g. <code>/trades/ETH-BTC?limit=50&amp;timestamp=1511481127561</code>.</p>
+
+<p>This endpoint will return the latest 5,000 to 10,000 trades per product. If you need older trade data, you can use the <code>/candles</code> endpoint.</p>
+
+<p>Polling this endpoint is discouraged in favor of subscribing to WebSocket events.</p>
+<h3 id='response'>Response</h3>
+<p>An array of the latest trades.</p>
+
+<p><code>side</code> indicates the taker order side. A <code>buy</code> indicates an up-tick and a <code>sell</code> indicates a down-tick.</p>
+<h1 id='candles'>Candles</h1>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1511481600</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.05132</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.05132</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"1009.753645"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1511467200</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"3201.906964"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1511251200</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.044683</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.053744</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.042048</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.045321</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"3310.527428"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Get historical candles for a product. Candles returned are grouped by <code>resolution</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><strong><code>GET /candles/:product</code></strong></p>
+<h3 id='parameters'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product</td>
+<td>A valid product</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>resolution</td>
+<td><em>N/A</em></td>
+<td>(required) Candle resolution to return. Can be <code>1</code>, <code>5</code>, <code>15</code>, <code>30</code>, <code>60</code>, <code>240</code>, <code>720</code>, <code>1D</code>, or <code>1W</code>.</td>
+</tr>
+<tr>
+<td>start</td>
+<td><em>N/A</em></td>
+<td>The time after which to fetch candles, in ms</td>
+</tr>
+<tr>
+<td>end</td>
+<td><em>N/A</em></td>
+<td>The time before which to fetch candles, in ms</td>
+</tr>
+</tbody></table>
+
+<p>If <code>start</code> is not required, <code>0</code> is used.
+If <code>end</code> is not provided, the current time is used.</p>
+
+<p>E.g. <code>/candles/ETH-BTC?resolution=60&amp;start=1511480127561&amp;end=1511480129513</code> fetches 1h candles between the start and end timestamps.</p>
+
+<p>A maximum of 500 candles are returned per request.</p>
+<h3 id='response'>Response</h3>
+<p>Each item in the array returned represents a candle with granularity <code>resolution</code>:</p>
+
+<ul>
+<li><strong>timestamp</strong> (in seconds)</li>
+<li><strong>open</strong> (first trade in this interval)</li>
+<li><strong>high</strong> (highest trade in this interval)</li>
+<li><strong>low</strong> (lowest trade in this interval)</li>
+<li><strong>close</strong> (last trade in this interval)</li>
+<li><strong>volume</strong> (volume of trading during this interval)</li>
+</ul>
+
+<p><code>volume</code> is returned as string to preserve float number precision. If the candle is active, <code>close</code> is the last price.</p>
+<h1 id='websocket'>WebSocket</h1><h1 id='private-events'>Private Events</h1><h1 id='order'>Order</h1>
+<p>You receive the events below when you&#39;re subscribed to the private <code>orders</code> channel.</p>
+<h2 id='received'>Received</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"received"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77942322"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279492.417"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>received</code> event is an acknowledgement by the matching engine that your order has been accepted for initial processing, regardless of whether it has filled or not.</p>
+
+<p>Received orders that begin to fill trigger one or more <code>match</code> events. RReceived orders that result in an open order on the book trigger an <code>open</code> event.</p>
+<h2 id='open'>Open</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"open"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77942322"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2451223"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279492.417"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>An <code>open</code> event means that your order is now visible on the book with a non-zero amount. Open orders remain on the book until they are filled or cancelled.</p>
+
+<p><code>size</code> is the original size of the order. <code>filled</code> indicates how much of the order was filled after going on the book.</p>
+
+<p>Market and stop orders will never trigger an <code>open</code> event.</p>
+<h2 id='set'>Set</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"set"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.88210022"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511432679991.121"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>set</code> event indicates that a stop or stop-limit order has been set successfully. Stop-limit orders will also have a <code>limit_price</code> field that indicates the limit price for that order.</p>
+<h2 id='triggered'>Triggered</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"triggered"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.88210022"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511434619393.320"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>triggered</code> event indicates that your stop or stop-limit order has been triggered and will become visible on the book.</p>
+<h2 id='match'>Match</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"match"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ec97c53-75b2-4e9b-bdfa-6eca818f8c8d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5d818156-fc9a-4bfe-b0e3-1ef3f3f5d799"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11.774650"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511434619393.320"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>match</code> event indicates that a trade occurred concerning one of your orders. <code>side</code> represents the taker side: a <code>buy</code> side match is an up-tick and a <code>sell</code> side match is a down-tick.</p>
+<h2 id='done'>Done</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511434699393.991"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>done</code> event indicates that your order has been fully filled and is no longer visible on the book.</p>
+<h2 id='cancelled'>Cancelled</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31bf3a89-2a0a-40b0-9327-ec0a5cc3ce3c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.22393981"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03131"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511434617391.877"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>cancelled</code> event indicates that your order was manually cancelled.</p>
+<h1 id='balance'>Balance</h1>
+<p>You receive the event below when you&#39;re subscribed to the private <code>balances</code> channel.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"377.9934"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9939.122"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18.1221"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55.991"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>balance</code> event is a balance update notification sent whenever one or more of your balances changes.</p>
+
+<p>The <code>total</code> balance value will appear only if it has changed.</p>
+<h1 id='deposit'>Deposit</h1>
+<p>You receive the event below when you&#39;re subscribed to the private <code>deposits</code> channel.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deposit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.556"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>deposit</code> event indicates that a new deposit has been detected on your account. It will only be sent once per deposit.</p>
+
+<p>The deposit may still be unconfirmed. Use the <code>balance</code> event to get notified when the deposit is credited to your balance.</p>
+<h1 id='public-events'>Public Events</h1><h1 id='heartbeat'>Heartbeat</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heartbeat"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1511482279491</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>WCX will send a <code>heartbeat</code> event every five seconds so you&#39;ll know your WebSocket connection is active. Hearbeats also include sequence numbers which you can use to check that no messages were missed.</p>
+
+<p>If you miss one or more heartbeats, or your sequence numbers contain gaps, your connection may be unreliable. We recommend that you disconnect and reconnect.</p>
+<h1 id='ticker'>Ticker</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04770"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04773"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bid_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33.881"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ask_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.913"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491.883"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When you first subscribe to the <code>ticker</code> channel, you&#39;ll receive a snapshot of the ticker.</p>
+<h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04770"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04773"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bid_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33.881"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ask_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.913"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491.883"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The <code>ticker</code> event provides real-time price updates and is sent every time a match occurs.</p>
+<h1 id='book'>Book</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.04"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4.90000000"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.039465"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4.24022501"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.039462"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.81290040"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.039375"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1.99379837"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w"> </span><span class="s2">"9.22057678"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.051323"</span><span class="p">,</span><span class="w"> </span><span class="s2">"3.52460275"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.051885"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.23329705"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.053011"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1.88536196"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When you first subscribe to the <code>book</code> channel, you&#39;ll receive a snapshot of the order book containing up to 100 bids and 100 asks.</p>
+<h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1.44543"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"0.05892"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2.99112"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>book</code> event provides real-time order book updates. It contains an <code>updates</code> array that contains arrays representing price level deltas.</p>
+
+<p>Each delta array contains:</p>
+
+<ul>
+<li>price</li>
+<li>size</li>
+<li>order count at this level. &#39;0&#39; means the price level was removed</li>
+<li>bid (0) or ask (1)</li>
+</ul>
+
+<p>This event is batched and sent every 0.5 seconds at most.</p>
+<h1 id='trades'>Trades</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trades"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1511507963627.726"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"product"</span><span class="p">:</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="s2">"605aa534-aa09-4c9d-bef5-9d8f70c00a72"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="s2">"9d335cce-d581-45f6-8efc-bdab3d61c6e2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"size"</span><span class="p">:</span><span class="s2">"0.10000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">0.04</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"side"</span><span class="p">:</span><span class="s2">"sell"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1511507893098.827"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"product"</span><span class="p">:</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="s2">"be9f10c6-166c-4c45-bcc0-f7f34d10399b"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="s2">"380e9304-091c-4ca7-852d-19ddf5ccc925"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"size"</span><span class="p">:</span><span class="s2">"0.10000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">0.051313</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"side"</span><span class="p">:</span><span class="s2">"sell"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When you first subscribe to the <code>trades</code> channel, you&#39;ll receive a snapshot of the most recent trades (up to 100).</p>
+<h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ec97c53-75b2-4e9b-bdfa-6eca818f8c8d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5d818156-fc9a-4bfe-b0e3-1ef3f3f5d799"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11.774650"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511434619393.320"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>trade</code> event indicates that a trade occurred on the market. <code>side</code> represents the taker side: a <code>buy</code> side match is an up-tick and a <code>sell</code> side match is a down-tick.</p>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>
