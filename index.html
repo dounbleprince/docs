@@ -219,6 +219,29 @@
             <a href="#rest" class="toc-h1 toc-link" data-title="REST">REST</a>
           </li>
           <li>
+            <a href="#requests" class="toc-h1 toc-link" data-title="Requests">Requests</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#getting-your-api-key-and-secret" class="toc-h2 toc-link" data-title="Getting your API Key and Secret">Getting your API Key and Secret</a>
+                  </li>
+                  <li>
+                    <a href="#signing-a-request" class="toc-h2 toc-link" data-title="Signing a Request">Signing a Request</a>
+                  </li>
+                  <li>
+                    <a href="#timestamp" class="toc-h2 toc-link" data-title="Timestamp">Timestamp</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rate-limits" class="toc-h1 toc-link" data-title="Rate limits">Rate limits</a>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+          <li>
             <a href="#private" class="toc-h1 toc-link" data-title="Private">Private</a>
           </li>
           <li>
@@ -267,6 +290,23 @@
           </li>
           <li>
             <a href="#websocket" class="toc-h1 toc-link" data-title="WebSocket">WebSocket</a>
+          </li>
+          <li>
+            <a href="#subscribe" class="toc-h1 toc-link" data-title="Subscribe">Subscribe</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#channels" class="toc-h2 toc-link" data-title="Channels">Channels</a>
+                  </li>
+                  <li>
+                    <a href="#authenticating" class="toc-h2 toc-link" data-title="Authenticating">Authenticating</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sequence-numbers" class="toc-h1 toc-link" data-title="Sequence Numbers">Sequence Numbers</a>
+          </li>
+          <li>
+            <a href="#rate-limits" class="toc-h1 toc-link" data-title="Rate limits">Rate limits</a>
           </li>
           <li>
             <a href="#private-events" class="toc-h1 toc-link" data-title="Private Events">Private Events</a>
@@ -350,7 +390,100 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='rest'>REST</h1><h1 id='private'>Private</h1><h1 id='orders'>Orders</h1><h2 id='place-a-new-order'>Place a New Order</h2>
+        <h1 id='rest'>REST</h1><h1 id='requests'>Requests</h1><h1 id='authentication'>Authentication</h1><h2 id='getting-your-api-key-and-secret'>Getting your API Key and Secret</h2>
+<p>You can generate an API key and secret from your <a href="https://wcex.com/settings/api">Settings/API</a> page. This information will be used to sign requests to private API endpoints.</p>
+<h2 id='signing-a-request'>Signing a Request</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">crypto</span> <span class="nx">from</span> <span class="s1">'crypto'</span>
+
+<span class="c1">// Signing a 'New Order' request</span>
+
+<span class="kr">const</span> <span class="nx">API_SECRET</span> <span class="o">=</span> <span class="s2">"6a0ef..."</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">TIMESTAMP</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+
+<span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+    <span class="na">product</span><span class="p">:</span> <span class="s2">"ETH-BTC"</span><span class="p">,</span>
+    <span class="na">side</span><span class="p">:</span> <span class="s2">"sell"</span><span class="p">,</span>
+    <span class="na">size</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="s2">"0.04"</span><span class="p">,</span>
+    <span class="na">condition</span><span class="p">:</span> <span class="s2">"PO"</span>
+<span class="p">});</span>
+
+<span class="kr">const</span> <span class="nx">message_to_sign</span> <span class="o">=</span> <span class="nx">TIMESTAMP</span> <span class="o">+</span> <span class="s2">"POST"</span> <span class="o">+</span> <span class="s2">"/new-order"</span> <span class="o">+</span> <span class="nx">body</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">hmac</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="nx">API_SECRET</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="nx">hmac</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">message_to_sign</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="s1">'base64'</span><span class="p">);</span>
+
+</code></pre>
+<p>Requests to private REST API endpoints must contain these headers:</p>
+
+<ul>
+<li><code>WCX-APIKEY</code> Your API key.</li>
+<li><code>WCX-SIG</code> Your request signature (see below).</li>
+<li><code>WCX-TIMESTAMP</code> A current timestamp, in milliseconds since UNIX epoch</li>
+</ul>
+
+<p>To sign a request, first create the message to sign, which is the concatenated string:</p>
+
+<p><code>timestamp + method + path + body</code></p>
+
+<p>where:</p>
+
+<ul>
+<li><code>timestamp</code> is the millisecond timestamp, the same as the <code>WCX-TIMESTAMP</code> header</li>
+<li><code>method</code> is the UPPERCASE HTTP method used to make the request (<code>GET</code>, <code>POST</code>, <code>PUT</code>, or <code>DELETE</code>)</li>
+<li><code>path</code> is the request path, e.g. <code>/new-order</code> (without query parameters)</li>
+<li><code>body</code> is the JSON-stringified body sent in the request. This mostly applies to <code>POST</code> requests and can be ommitted for requests without a body.</li>
+</ul>
+
+<p>Generate a sha256 HMAC of this string using your API Secret, then base64-encode the output to get the <code>WCX-SIG</code> for this request.</p>
+<h2 id='timestamp'>Timestamp</h2>
+<p><code>WCX-TIMESTAMP</code> is the current timestamp, in milliseconds since UNIX epoch. It has to be within 30 seconds of server time for the request to be valid. This helps prevent man-in-the-middle attacks and provides request replay protection.</p>
+<h1 id='rate-limits'>Rate limits</h1>
+<p>WCX rate limits its API to prevent abuse that would degrade the exchange&#39;s ability to maintain top-notch performance for all traders.</p>
+
+<p>By default, all endpoints are limited to 5 requests per second per IP. Requests that exceed this limit will receive a Rate Limit Exceeded error with status code <code>429</code>.</p>
+<h1 id='errors'>Errors</h1>
+<p>Bad requests receive an HTTP <code>4xx</code> response with a <code>message</code> describing the error.</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>401</td>
+<td>Unauthorized – Authentication error</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Failed Request</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Resource Not Found</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable Entity – there was an issue parsing your request</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Rate Limit Exceeded – too many requests</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error – there was a problem with our servers</td>
+</tr>
+</tbody></table>
+
+<p>If the request is successful, a <code>200</code> (OK) staus code is returned, along with an optional body as documented in this API reference.</p>
+<h1 id='private'>Private</h1><h1 id='orders'>Orders</h1><h2 id='place-a-new-order'>Place a New Order</h2>
 <blockquote>
 <p><strong>Place a post-only limit order to sell 10 ETH at 0.04BTC.</strong></p>
 
@@ -616,7 +749,7 @@
 <tr>
 <td>limit</td>
 <td>100</td>
-<td>Number of orders to return (max is 100)</td>
+<td>Number of fills to return (max is 100)</td>
 </tr>
 <tr>
 <td>timestamp</td>
@@ -1025,18 +1158,15 @@
 </tr>
 <tr>
 <td>start</td>
-<td><em>N/A</em></td>
+<td>0</td>
 <td>The time after which to fetch candles, in ms</td>
 </tr>
 <tr>
 <td>end</td>
-<td><em>N/A</em></td>
+<td>Current time</td>
 <td>The time before which to fetch candles, in ms</td>
 </tr>
 </tbody></table>
-
-<p>If <code>start</code> is not required, <code>0</code> is used.
-If <code>end</code> is not provided, the current time is used.</p>
 
 <p>E.g. <code>/candles/ETH-BTC?resolution=60&amp;start=1511480127561&amp;end=1511480129513</code> fetches 1h candles between the start and end timestamps.</p>
 
@@ -1054,10 +1184,83 @@ If <code>end</code> is not provided, the current time is used.</p>
 </ul>
 
 <p><code>volume</code> is returned as string to preserve float number precision. If the candle is active, <code>close</code> is the last price.</p>
-<h1 id='websocket'>WebSocket</h1><h1 id='private-events'>Private Events</h1><h1 id='order'>Order</h1>
-<p>You receive the events below when you&#39;re subscribed to the private <code>orders</code> channel.</p>
-<h2 id='received'>Received</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h1 id='websocket'>WebSocket</h1><h1 id='subscribe'>Subscribe</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trades"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LTC-BTC"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>To receive WebSocket events, you must first send a <code>subscribe</code> message with the channels you wish to subscribe to.</p>
+
+<p>You can subscribe to specific products by passing them in the <code>products</code> array. You can subscribe to up to 5 products at a time.</p>
+
+<p>You can also specify your products on a per-channel basis by passing an object containing the channel&#39;s <code>name</code> and <code>products</code> instead of a string.</p>
+
+<p>You can unsubscribe in a similar fashion, by sending an <code>unsubscribe</code> message. To unsubscribe from specific channels or products, you can pass them into <code>products</code> or <code>channels</code>. To unsubscribe entirely, simply send an unsubscribe message without any channels set.</p>
+<h2 id='channels'>Channels</h2>
+<p>You can subscribe to the following channels:</p>
+<h3 id='public-channels'>Public channels</h3>
+<ul>
+<li><code>ticker</code></li>
+<li><code>book</code></li>
+<li><code>trades</code></li>
+</ul>
+<h3 id='private-channels'>Private channels</h3>
+<ul>
+<li><code>orders</code></li>
+<li><code>balances</code></li>
+<li><code>deposits</code></li>
+</ul>
+<h2 id='authenticating'>Authenticating</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"orders"</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances"</span><span class="p">,</span><span class="w"> </span><span class="err">products</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LTC-BTC"</span><span class="p">]}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"auth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8b6bcdc6-5ef8-463b-833f-3681dc2c90d3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sig"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1073b62e4dd62e4dd56244c89941..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1511027890939</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>To receive events from private channels, you must authenticate when sending the initial <code>subscribe</code> message.</p>
+
+<p>Authentication is similar to REST request signing and authentication. Pass in an <code>auth</code> field in your <code>subscribe</code> message containing:</p>
+
+<ul>
+<li><code>key</code> Your API key</li>
+<li><code>sig</code> The signed message for the <code>GET /ws-auth</code> request</li>
+<li><code>timestamp</code> The current time in milliseconds since UNIX epoch</li>
+</ul>
+<h1 id='sequence-numbers'>Sequence Numbers</h1>
+<p>Events received through the WebSocket contain a <code>sequence</code> number. This is an integer value that will increase by 1 for each event sent for the duration of your connection.</p>
+
+<p>You can ensure that you&#39;re receiving WebSocket messages in the expected order, and without dropped messages, by keeping track of the sequence numbers.</p>
+
+<p>If you observe out of order seque3nce numbers, or dropped sequence numbers, you may need to disconnect and reconnect.</p>
+
+<p>Each WebSocket connection keeps track of sequence numbers independently, so if you have multiple WebSocket connections open, keep in mind to track sequence numbers separately.</p>
+<h1 id='rate-limits'>Rate limits</h1>
+<p>WebSocket <code>subscribe</code> and <code>unsubscribe</code> messages are rate limited to 1 per 5 seconds per IP.</p>
+
+<p>If you&#39;re being rate-limited, you&#39;ll receive a response with type <code>error</code>.</p>
+<h1 id='private-events'>Private Events</h1><h1 id='order'>Order</h1><h2 id='received'>Received</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"received"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77942322"</span><span class="p">,</span><span class="w">
@@ -1069,9 +1272,10 @@ If <code>end</code> is not provided, the current time is used.</p>
 </span></code></pre>
 <p>A <code>received</code> event is an acknowledgement by the matching engine that your order has been accepted for initial processing, regardless of whether it has filled or not.</p>
 
-<p>Received orders that begin to fill trigger one or more <code>match</code> events. RReceived orders that result in an open order on the book trigger an <code>open</code> event.</p>
+<p>Received orders that begin to fill trigger one or more <code>match</code> events. Received orders that result in an open order on the book trigger an <code>open</code> event.</p>
 <h2 id='open'>Open</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"open"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77942322"</span><span class="p">,</span><span class="w">
@@ -1089,6 +1293,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>Market and stop orders will never trigger an <code>open</code> event.</p>
 <h2 id='set'>Set</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"set"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.88210022"</span><span class="p">,</span><span class="w">
@@ -1101,6 +1306,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>A <code>set</code> event indicates that a stop or stop-limit order has been set successfully. Stop-limit orders will also have a <code>limit_price</code> field that indicates the limit price for that order.</p>
 <h2 id='triggered'>Triggered</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"triggered"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.88210022"</span><span class="p">,</span><span class="w">
@@ -1113,6 +1319,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>A <code>triggered</code> event indicates that your stop or stop-limit order has been triggered and will become visible on the book.</p>
 <h2 id='match'>Match</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"match"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ec97c53-75b2-4e9b-bdfa-6eca818f8c8d"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5d818156-fc9a-4bfe-b0e3-1ef3f3f5d799"</span><span class="p">,</span><span class="w">
@@ -1125,6 +1332,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>A <code>match</code> event indicates that a trade occurred concerning one of your orders. <code>side</code> represents the taker side: a <code>buy</code> side match is an up-tick and a <code>sell</code> side match is a down-tick.</p>
 <h2 id='done'>Done</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf2b704c-010a-48ca-93fb-d0193f24420a"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05132"</span><span class="p">,</span><span class="w">
@@ -1135,6 +1343,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>A <code>done</code> event indicates that your order has been fully filled and is no longer visible on the book.</p>
 <h2 id='cancelled'>Cancelled</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">812</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31bf3a89-2a0a-40b0-9327-ec0a5cc3ce3c"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.22393981"</span><span class="p">,</span><span class="w">
@@ -1149,6 +1358,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>You receive the event below when you&#39;re subscribed to the private <code>balances</code> channel.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="s2">"updates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
@@ -1170,6 +1380,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>You receive the event below when you&#39;re subscribed to the private <code>deposits</code> channel.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deposit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">661</span><span class="p">,</span><span class="w">
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.556"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279491"</span><span class="w">
@@ -1202,6 +1413,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>When you first subscribe to the <code>ticker</code> channel, you&#39;ll receive a snapshot of the ticker.</p>
 <h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04770"</span><span class="p">,</span><span class="w">
@@ -1233,6 +1445,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>When you first subscribe to the <code>book</code> channel, you&#39;ll receive a snapshot of the order book containing up to 100 bids and 100 asks.</p>
 <h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">991</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"updates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">[</span><span class="s2">"0.04771"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1.44543"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span><span class="w">
@@ -1281,6 +1494,7 @@ If <code>end</code> is not provided, the current time is used.</p>
 <p>When you first subscribe to the <code>trades</code> channel, you&#39;ll receive a snapshot of the most recent trades (up to 100).</p>
 <h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">439</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ec97c53-75b2-4e9b-bdfa-6eca818f8c8d"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5d818156-fc9a-4bfe-b0e3-1ef3f3f5d799"</span><span class="p">,</span><span class="w">
