@@ -216,21 +216,18 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#data-types" class="toc-h1 toc-link " data-title="Data Types">Data Types</a>
+            <a href="#overview" class="toc-h1 toc-link " data-title="Overview">Overview</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#timestamp" class="toc-h2 toc-link" data-title="Timestamp">Timestamp</a>
+                    <a href="#introduction" class="toc-h2 toc-link" data-title="Introduction">Introduction</a>
                   </li>
                   <li>
-                    <a href="#numbers" class="toc-h2 toc-link" data-title="Numbers">Numbers</a>
+                    <a href="#data-types" class="toc-h2 toc-link" data-title="Data Types">Data Types</a>
                   </li>
               </ul>
           </li>
           <li>
             <a href="#REST" class="toc-h1 toc-link section-header" data-title="REST">REST</a>
-          </li>
-          <li>
-            <a href="#Requests" class="toc-h1 toc-link section-subheader" data-title="Requests">Requests</a>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link " data-title="Authentication">Authentication</a>
@@ -301,9 +298,6 @@
           </li>
           <li>
             <a href="#WebSocket" class="toc-h1 toc-link section-header" data-title="WebSocket">WebSocket</a>
-          </li>
-          <li>
-            <a href="#WS-Requests" class="toc-h1 toc-link section-subheader" data-title="Requests">Requests</a>
           </li>
           <li>
             <a href="#subscribe" class="toc-h1 toc-link " data-title="Subscribe">Subscribe</a>
@@ -397,26 +391,29 @@
               </ul>
           </li>
       </div>
-        <ul class="toc-footer">
-            <li><a href='https://wcex.com/'>WCX</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='data-types'>Data Types</h1><h2 id='timestamp'>Timestamp</h2>
+        <h1 id='overview'>Overview</h1><h2 id='introduction'>Introduction</h2>
+<p>WCX offers both REST and WebSocket APIs. This documentation outlines API functionality and provides code examples in the right-side column.</p>
+
+<p>You can use the API to programmatically place new orders, check your balance, or stream real-time price and order book updates, among other things.</p>
+
+<p>All request and response bodies are encoded in JSON (<code>application/json</code>). All requests must be made over SSL.</p>
+<h2 id='data-types'>Data Types</h2><h3 id='timestamp'>Timestamp</h3>
 <p>All timestamps are in milliseconds since UNIX epoch. Many endpoints, particularly those around the matching engine, will return millisecond timestamps with microsecond precision, e.g.</p>
 
 <p><code>&quot;1511482279491.739&quot;</code></p>
 
 <p>All date libraries in modern languages should be able to handle this without issue.</p>
-<h2 id='numbers'>Numbers</h2>
+<h3 id='numbers'>Numbers</h3>
 <p>We recommend passing all numbers as strings, instead of integer or floats, to preserve float precision and processing.</p>
 
 <p>Numbers returned by the API, particularly decimals, will be returned as strings.</p>
 <h1 id='REST' class='section-header'>REST</h1>
-
-<h1 id='Requests' class='section-subheader'>Requests</h1>
+<h3 id='endpoint-url'>Endpoint URL</h3>
+<p><code>https://api.wcex.com</code></p>
 <h1 id='authentication'>Authentication</h1><h2 id='getting-your-api-key-and-secret'>Getting your API Key and Secret</h2>
 <p>You can generate an API key and secret from your <a href="https://wcex.com/settings/api">Settings/API</a> page. This information will be used to sign requests to private API endpoints.</p>
 <h2 id='signing-a-request'>Signing a Request</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">crypto</span> <span class="nx">from</span> <span class="s1">'crypto'</span>
@@ -1214,8 +1211,8 @@
 
 <p><code>volume</code> is returned as string to preserve float number precision. If the candle is active, <code>close</code> is the last price.</p>
 <h1 id='WebSocket' class='section-header'>WebSocket</h1>
-
-<h1 id='WS-Requests' class='section-subheader'>Requests</h1>
+<h3 id='endpoint-url'>Endpoint URL</h3>
+<p><code>wss://data.wcex.com</code></p>
 <h1 id='subscribe'>Subscribe</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">],</span><span class="w">
