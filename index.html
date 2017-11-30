@@ -209,10 +209,12 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <div class='logo-wrapper'>
+        <img src='images/logo.png'>
+      </div>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#overview" class="toc-h1 toc-link " data-title="Overview">Overview</a>
+            <a href="#overview" class="toc-h1 toc-link section-header" data-title="Overview">Overview</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#introduction" class="toc-h2 toc-link" data-title="Introduction">Introduction</a>
@@ -229,7 +231,7 @@
             <a href="#authentication" class="toc-h1 toc-link " data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#getting-your-api-key-and-secret" class="toc-h2 toc-link" data-title="Getting your API Key and Secret">Getting your API Key and Secret</a>
+                    <a href="#getting-your-api-key" class="toc-h2 toc-link" data-title="Getting your API Key">Getting your API Key</a>
                   </li>
                   <li>
                     <a href="#signing-a-request" class="toc-h2 toc-link" data-title="Signing a Request">Signing a Request</a>
@@ -397,27 +399,30 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='overview'>Overview</h1><h2 id='introduction'>Introduction</h2>
+        <h1 id='overview' class='section-header'>Overview</h1>
+<h2 id='introduction'>Introduction</h2>
 <p>WCX offers both REST and WebSocket APIs. This documentation outlines API functionality and provides code examples in the right-side column.</p>
 
 <p>You can use the API to programmatically place new orders, check your balance, or stream real-time price and order book updates, among other things.</p>
 
 <p>All request and response bodies are encoded in JSON (<code>application/json</code>). All requests must be made over SSL.</p>
+<h3 id='notice'>Notice</h3>
+<p>The API is currently in <strong>closed beta</strong> and not accepting requests. It&#39;s planned to launch publicly along with WCX this December.</p>
 <h2 id='data-types'>Data Types</h2><h3 id='timestamp'>Timestamp</h3>
-<p>All timestamps are in milliseconds since UNIX epoch. Many endpoints, particularly those around the matching engine, will return millisecond timestamps with microsecond precision, e.g.</p>
+<p>All timestamps are in milliseconds since UNIX epoch. Many endpoints, particularly those relating to the matching engine, will return millisecond timestamps with microsecond precision, encoded as string.</p>
 
-<p><code>&quot;1511482279491.739&quot;</code></p>
+<p><code>1511482279491.739</code></p>
 
 <p>All date libraries in modern languages should be able to handle this without issue.</p>
 <h3 id='numbers'>Numbers</h3>
-<p>We recommend passing all numbers as strings, instead of integer or floats, to preserve float precision and processing.</p>
+<p>We recommend passing all numbers as strings in your requests, instead of integers or floats, to preserve precision and accurate processing.</p>
 
 <p>Numbers returned by the API, particularly decimals, will be returned as strings.</p>
 <h1 id='REST' class='section-header'>REST</h1>
 <h3 id='endpoint-url'>Endpoint URL</h3>
 <p><code>https://api.wcex.com</code></p>
-<h1 id='authentication'>Authentication</h1><h2 id='getting-your-api-key-and-secret'>Getting your API Key and Secret</h2>
-<p>You can generate an API key and secret from your <a href="https://wcex.com/settings/api">Settings/API</a> page. This information will be used to sign requests to private API endpoints.</p>
+<h1 id='authentication'>Authentication</h1><h2 id='getting-your-api-key'>Getting your API Key</h2>
+<p>You can generate an API key and secret from your <strong>Settings/API</strong> page. This information will be used to sign requests to private API endpoints.</p>
 <h2 id='signing-a-request'>Signing a Request</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">crypto</span> <span class="nx">from</span> <span class="s1">'crypto'</span>
 
 <span class="c1">// Signing a 'New Order' request</span>
@@ -444,8 +449,8 @@
 <p>Requests to private REST API endpoints must contain these headers:</p>
 
 <ul>
-<li><code>WCX-APIKEY</code> Your API key.</li>
-<li><code>WCX-SIG</code> Your request signature (see below).</li>
+<li><code>WCX-APIKEY</code> Your API key</li>
+<li><code>WCX-SIG</code> Your request signature (see below)</li>
 <li><code>WCX-TIMESTAMP</code> A current timestamp, in milliseconds since UNIX epoch</li>
 </ul>
 
@@ -456,15 +461,17 @@
 <p>where:</p>
 
 <ul>
-<li><code>timestamp</code> is the millisecond timestamp, the same as the <code>WCX-TIMESTAMP</code> header</li>
-<li><code>method</code> is the UPPERCASE HTTP method used to make the request (<code>GET</code>, <code>POST</code>, <code>PUT</code>, or <code>DELETE</code>)</li>
+<li><code>timestamp</code> is the millisecond timestamp, the same one you pass to the <code>WCX-TIMESTAMP</code> header</li>
+<li><code>method</code> is the UPPER CASE HTTP method used to make the request (<code>GET</code>, <code>POST</code>, <code>PUT</code>, or <code>DELETE</code>)</li>
 <li><code>path</code> is the request path, e.g. <code>/new-order</code> (without query parameters)</li>
-<li><code>body</code> is the JSON-stringified body sent in the request. This mostly applies to <code>POST</code> requests and can be ommitted for requests without a body.</li>
+<li><code>body</code> is the JSON-stringified body sent in the request. This generally applies to <code>POST</code> requests and can be ommitted for requests without a body.</li>
 </ul>
 
-<p>Generate a sha256 HMAC of this string using your API Secret, then base64-encode the output to get the <code>WCX-SIG</code> for this request.</p>
+<p>Generate a SHA-256 HMAC of this string using your API Secret, then Base64-encode the output to get the <code>WCX-SIG</code> for this request.</p>
 <h2 id='timestamp'>Timestamp</h2>
-<p><code>WCX-TIMESTAMP</code> is the current timestamp, in milliseconds since UNIX epoch. It has to be within 30 seconds of server time for the request to be valid. This helps prevent man-in-the-middle attacks and provides request replay protection.</p>
+<p><code>WCX-TIMESTAMP</code> is the current timestamp, in milliseconds since UNIX epoch. Providing it helps prevent man-in-the-middle attacks and provides request replay protection.</p>
+
+<p>It has to be within 30 seconds of server time for the request to be valid. You can check the server time using the <a href="#time">/time</a> endpoint.</p>
 <h1 id='rate-limits'>Rate limits</h1>
 <p>WCX rate limits its API to prevent abuse that would degrade the exchange&#39;s ability to maintain top-notch performance for all traders.</p>
 
@@ -512,7 +519,7 @@
 <h1 id='REST-Private' class='section-subheader'>Private</h1>
 <h1 id='orders'>Orders</h1><h2 id='place-a-new-order'>Place a New Order</h2>
 <blockquote>
-<p><strong>Place a post-only limit order to sell 10 ETH at 0.04BTC.</strong></p>
+<p><strong>Place a post-only limit order to sell 10 ETH at 0.04.</strong></p>
 
 <p>Request</p>
 </blockquote>
@@ -575,9 +582,9 @@
 
 <p>* <code>funds</code> must be specified for <code>buy</code> <code>market</code> and <code>buy</code> <code>stop</code> orders. In all other cases, <code>size</code> must be specified. Only one of <code>funds</code> or <code>size</code> can be set.</p>
 
-<p>** Price can be ignored for <code>market</code> orders, but is required for all other order types. For <code>stop</code> orders, this is the price at which the stop order triggers.</p>
+<p>** Price can be ignored for <code>market</code> orders, but is required for all other order types. For <code>stop</code> orders, this is the price at which the stop order triggers, otherwise known as the stop price.</p>
 
-<p>As an alternative to market orders, you can use limit orders with price set deep in the opposite book. This allows you to set a size in base asset and a price, which gives you an execution price guarantee.</p>
+<p>As an alternative to market orders, you can use limit orders with price set deep in the opposite book. This allows you to set a size in base asset and a price, giving you an execution price guarantee.</p>
 
 <p>A list of products can be found by querying the <a href="#products"><code>/products</code></a> endpoint.</p>
 <h4 id='limit-order-parameters'>Limit order parameters</h4>
@@ -632,8 +639,6 @@
 <p><code>timestamp</code> is the time your order was received by the matching engine.</p>
 <h2 id='cancel-an-order'>Cancel an Order</h2>
 <blockquote>
-<p><strong>Cancel an order.</strong></p>
-
 <p>Request</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -797,7 +802,7 @@
 
 <p><code>is_self_trade</code> is set to true if your fill results from a self-trade.</p>
 
-<p><code>is_taker</code> is set to <strong>true</strong> when your fill results in taking liquidity from the book. This field is set to true for self-trades.</p>
+<p><code>is_taker</code> is set to true when your fill results in taking liquidity from the book. This field is always set to true for self-trades.</p>
 <h1 id='transactions'>Transactions</h1>
 <blockquote>
 <p>Response</p>
@@ -909,7 +914,7 @@
 </tr>
 </tbody></table>
 
-<p>Omitting <code>asset(s)</code> will return all balances on your account.</p>
+<p>Omitting <code>asset(s)</code> will return all balances on your account. Only non-zero balances, or assets for which you have made at least one deposit will be returned.</p>
 <h3 id='available-balance'>Available balance</h3>
 <p>Your available balance is equal to your total balance minus the amount that&#39;s been placed on hold.</p>
 
@@ -993,7 +998,7 @@
 </span></code></pre><h3 id='http-request'>HTTP Request</h3>
 <p><strong><code>GET /ticker/:product</code></strong></p>
 
-<p>Note: the response from this endpoint is updated only when the last price of the requested product changes.</p>
+<p>Note: the response from this endpoint is updated when the last price of the requested product changes.</p>
 <h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1075,13 +1080,13 @@
         </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482279492.417"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"product"</span><span class="p">:</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="s2">"7f66a16c-0b47-4bd6-8add-6b2c33366082"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"size"</span><span class="p">:</span><span class="s2">"0.97422208"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">0.051323</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"side"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1511482127569.335"</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6023aca-333a-44d9-98fe-279e279f3a86"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7f66a16c-0b47-4bd6-8add-6b2c33366082"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.97422208"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.051323"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482127569.335"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -1301,7 +1306,10 @@
   </span><span class="s2">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"orders"</span><span class="p">,</span><span class="w">
-    </span><span class="p">{</span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances"</span><span class="p">,</span><span class="w"> </span><span class="err">products</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LTC-BTC"</span><span class="p">]}</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LTC-BTC"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"auth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8b6bcdc6-5ef8-463b-833f-3681dc2c90d3"</span><span class="p">,</span><span class="w">
@@ -1543,29 +1551,29 @@
 <li>bid (0) or ask (1)</li>
 </ul>
 
-<p>This event is batched and sent every 0.5 seconds at most.</p>
+<p>This event is batched and sent every 500 milliseconds at most.</p>
 <h1 id='trades'>Trades</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trades"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1511507963627.726"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"product"</span><span class="p">:</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="s2">"605aa534-aa09-4c9d-bef5-9d8f70c00a72"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="s2">"9d335cce-d581-45f6-8efc-bdab3d61c6e2"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"size"</span><span class="p">:</span><span class="s2">"0.10000000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">0.04</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"side"</span><span class="p">:</span><span class="s2">"sell"</span><span class="w">
+            </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511507963627.726"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"605aa534-aa09-4c9d-bef5-9d8f70c00a72"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9d335cce-d581-45f6-8efc-bdab3d61c6e2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"1511507893098.827"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"product"</span><span class="p">:</span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="s2">"be9f10c6-166c-4c45-bcc0-f7f34d10399b"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="s2">"380e9304-091c-4ca7-852d-19ddf5ccc925"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"size"</span><span class="p">:</span><span class="s2">"0.10000000"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">0.051313</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"side"</span><span class="p">:</span><span class="s2">"sell"</span><span class="w">
+            </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511507893098.827"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"taker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be9f10c6-166c-4c45-bcc0-f7f34d10399b"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maker_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380e9304-091c-4ca7-852d-19ddf5ccc925"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10000000"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.051313"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
