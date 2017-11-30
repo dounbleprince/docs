@@ -246,7 +246,7 @@
               </ul>
           </li>
           <li>
-            <a href="#rate-limits" class="toc-h1 toc-link " data-title="Rate limits">Rate limits</a>
+            <a href="#rate-limits-rest" class="toc-h1 toc-link " data-title="Rate limits">Rate limits</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link " data-title="Errors">Errors</a>
@@ -287,7 +287,7 @@
             <a href="#products" class="toc-h1 toc-link " data-title="Products">Products</a>
           </li>
           <li>
-            <a href="#ticker" class="toc-h1 toc-link " data-title="Ticker">Ticker</a>
+            <a href="#ticker-rest" class="toc-h1 toc-link " data-title="Ticker">Ticker</a>
           </li>
           <li>
             <a href="#order-book" class="toc-h1 toc-link " data-title="Order Book">Order Book</a>
@@ -322,7 +322,7 @@
             <a href="#sequence-numbers" class="toc-h1 toc-link " data-title="Sequence Numbers">Sequence Numbers</a>
           </li>
           <li>
-            <a href="#rate-limits" class="toc-h1 toc-link " data-title="Rate limits">Rate limits</a>
+            <a href="#rate-limits-websocket" class="toc-h1 toc-link " data-title="Rate limits">Rate limits</a>
           </li>
           <li>
             <a href="#Private-Events" class="toc-h1 toc-link section-subheader" data-title="Private Events">Private Events</a>
@@ -366,37 +366,13 @@
             <a href="#heartbeat" class="toc-h1 toc-link " data-title="Heartbeat">Heartbeat</a>
           </li>
           <li>
-            <a href="#ticker" class="toc-h1 toc-link " data-title="Ticker">Ticker</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#snapshot" class="toc-h2 toc-link" data-title="Snapshot">Snapshot</a>
-                  </li>
-                  <li>
-                    <a href="#event" class="toc-h2 toc-link" data-title="Event">Event</a>
-                  </li>
-              </ul>
+            <a href="#ticker-websocket" class="toc-h1 toc-link " data-title="Ticker">Ticker</a>
           </li>
           <li>
             <a href="#book" class="toc-h1 toc-link " data-title="Book">Book</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#snapshot" class="toc-h2 toc-link" data-title="Snapshot">Snapshot</a>
-                  </li>
-                  <li>
-                    <a href="#event" class="toc-h2 toc-link" data-title="Event">Event</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#trades" class="toc-h1 toc-link " data-title="Trades">Trades</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#snapshot" class="toc-h2 toc-link" data-title="Snapshot">Snapshot</a>
-                  </li>
-                  <li>
-                    <a href="#event" class="toc-h2 toc-link" data-title="Event">Event</a>
-                  </li>
-              </ul>
           </li>
       </div>
     </div>
@@ -412,7 +388,9 @@
 <p>All request and response bodies are encoded in JSON (<code>application/json</code>). All requests must be made over SSL.</p>
 <h3 id='notice'>Notice</h3>
 <p>The API is currently in <strong>closed beta</strong> and not accepting requests. It&#39;s planned to launch publicly along with WCX this December.</p>
-<h2 id='data-types'>Data Types</h2><h3 id='timestamp'>Timestamp</h3>
+<h2 id='data-types'>Data Types</h2>
+<h3 id='data-types-timestamp'>Timestamp</h3>
+
 <p>All timestamps are in milliseconds since UNIX epoch. Many endpoints, particularly those relating to the matching engine, will return millisecond timestamps with microsecond precision, encoded as string.</p>
 
 <p><code>1511482279491.739</code></p>
@@ -476,7 +454,8 @@
 <p><code>WCX-TIMESTAMP</code> is the current timestamp, in milliseconds since UNIX epoch. Providing it helps prevent man-in-the-middle attacks and provides request replay protection.</p>
 
 <p>It has to be within 30 seconds of server time for the request to be valid. You can check the server time using the <a href="#time">/time</a> endpoint.</p>
-<h1 id='rate-limits'>Rate limits</h1>
+<h1 id='rate-limits-rest'>Rate limits</h1>
+
 <p>WCX rate limits its API to prevent abuse that would degrade the exchange&#39;s ability to maintain top-notch performance for all traders.</p>
 
 <p>By default, all endpoints are limited to 5 requests per second per IP. Requests that exceed this limit will receive a Rate Limit Exceeded error with status code <code>429</code>.</p>
@@ -986,7 +965,8 @@
 <p><code>minimum_value</code> represents the minimum amount, in counter asset, to place an order.</p>
 
 <p><code>precision_price</code> represents the maximum number of decimals tracked for this product&#39;s price. For example, a price precision of 6 means that a product&#39;s price is tracked up to the nearest 0.000001. Prices submitted with more decimals will be rounded to the nearest price precision.</p>
-<h1 id='ticker'>Ticker</h1>
+<h1 id='ticker-rest'>Ticker</h1>
+
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -1339,7 +1319,8 @@
 <p>If you observe out of order sequence numbers, or dropped sequence numbers, you may need to disconnect and reconnect.</p>
 
 <p>Each WebSocket connection keeps track of sequence numbers independently, so if you have multiple WebSocket connections open, keep in mind to track sequence numbers separately.</p>
-<h1 id='rate-limits'>Rate limits</h1>
+<h1 id='rate-limits-websocket'>Rate limits</h1>
+
 <p>WebSocket <code>subscribe</code> and <code>unsubscribe</code> messages are rate limited to 1 per 5 seconds per IP.</p>
 
 <p>If you&#39;re being rate-limited, you&#39;ll receive a response with type <code>error</code>.</p>
@@ -1440,9 +1421,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>A <code>cancelled</code> event indicates that your order was manually cancelled.</p>
-<h1 id='balance'>Balance</h1>
-<p>You receive the event below when you&#39;re subscribed to the private <code>balances</code> channel.</p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h1 id='balance'>Balance</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="s2">"updates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1462,9 +1441,7 @@
 <p>A <code>balance</code> event is a balance update notification sent whenever one or more of your balances changes.</p>
 
 <p>The <code>total</code> balance value will appear only if it has changed.</p>
-<h1 id='deposit'>Deposit</h1>
-<p>You receive the event below when you&#39;re subscribed to the private <code>deposits</code> channel.</p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h1 id='deposit'>Deposit</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deposit"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">661</span><span class="p">,</span><span class="w">
     </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.556"</span><span class="p">,</span><span class="w">
@@ -1485,7 +1462,8 @@
 <p>WCX will send a <code>heartbeat</code> event every five seconds so you&#39;ll know your WebSocket connection is active. Hearbeats also include sequence numbers which you can use to check that no messages were missed.</p>
 
 <p>If you miss one or more heartbeats, or your sequence numbers contain gaps, your connection may be unreliable. We recommend that you disconnect and reconnect.</p>
-<h1 id='ticker'>Ticker</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h1 id='ticker-websocket'>Ticker</h1>
+<h3 id='snapshot'>Snapshot</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
@@ -1500,7 +1478,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>When you first subscribe to the <code>ticker</code> channel, you&#39;ll receive a snapshot of the ticker.</p>
-<h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h3 id='event'>Event</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ticker"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">211</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
@@ -1513,7 +1491,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>The <code>ticker</code> event provides real-time price updates and is sent every time a match occurs.</p>
-<h1 id='book'>Book</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h1 id='book'>Book</h1><h3 id='snapshot'>Snapshot</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
@@ -1534,7 +1512,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>When you first subscribe to the <code>book</code> channel, you&#39;ll receive a snapshot of the order book containing up to 100 bids and 100 asks.</p>
-<h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h3 id='event'>Event</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">991</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
@@ -1556,7 +1534,7 @@
 </ul>
 
 <p>This event is batched and sent every 500 milliseconds at most.</p>
-<h1 id='trades'>Trades</h1><h2 id='snapshot'>Snapshot</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h1 id='trades'>Trades</h1><h3 id='snapshot'>Snapshot</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trades"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
@@ -1583,7 +1561,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>When you first subscribe to the <code>trades</code> channel, you&#39;ll receive a snapshot of the most recent trades (up to 100).</p>
-<h2 id='event'>Event</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h3 id='event'>Event</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">439</span><span class="p">,</span><span class="w">
     </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-BTC"</span><span class="p">,</span><span class="w">
