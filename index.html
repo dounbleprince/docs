@@ -226,6 +226,9 @@
                   <li>
                     <a href="#data-types" class="toc-h2 toc-link" data-title="Data Types">Data Types</a>
                   </li>
+                  <li>
+                    <a href="#terminology" class="toc-h2 toc-link" data-title="Terminology">Terminology</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -400,6 +403,8 @@
 <p>We recommend passing all numbers as strings in your requests, instead of integers or floats, to preserve precision and accurate processing.</p>
 
 <p>Numbers returned by the API, particularly decimals, will be returned as strings.</p>
+<h2 id='terminology'>Terminology</h2><h3 id='base-and-counter-assets'>Base and Counter Assets</h3>
+<p>A product is a pair made of one base asset and one counter asset. For example, for ETH/BTC, ETH is the base asset, and BTC is the counter asset.</p>
 <h1 id='REST' class='section-header'>REST</h1>
 <h3 id='endpoint-url'>Endpoint URL</h3>
 <p><code>https://api.wcex.com</code></p>
@@ -542,12 +547,12 @@
 <td>A valid product</td>
 </tr>
 <tr>
-<td>side</td>
-<td>Can be <code>buy</code> or <code>sell</code></td>
-</tr>
-<tr>
 <td>type</td>
 <td>Can be <code>limit</code> (default), <code>market</code>, <code>stop</code>, or <code>stop-limit</code></td>
+</tr>
+<tr>
+<td>side</td>
+<td>Can be <code>buy</code> or <code>sell</code></td>
 </tr>
 <tr>
 <td>size</td>
@@ -815,7 +820,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>List your transactions, ordered by time.</p>
+<p>List your transactions.</p>
 
 <p>A transaction is an entry in your account ledger that affects your account balance. It can be an external transfer, such as a deposit or withdrawal, or an internal transfer, such as a trade or a fee.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -845,7 +850,7 @@
 <tr>
 <td>type</td>
 <td>all</td>
-<td>(optional) Can be <code>all</code>, <code>deposit</code>, <code>withdraw</code>, <code>trade</code>, or <code>fee</code></td>
+<td>Can be <code>all</code>, <code>deposit</code>, <code>withdraw</code>, <code>trade</code>, or <code>fee</code></td>
 </tr>
 <tr>
 <td>limit</td>
@@ -1111,7 +1116,7 @@
 
 <p>E.g. <code>/trades/ETH-BTC?limit=50&amp;timestamp=1511481127561</code>.</p>
 
-<p>This endpoint will return the latest 5,000 to 10,000 trades per product. If you need older trade data, you can use the <code>/candles</code> endpoint.</p>
+<p>This endpoint will return the latest 5,000 trades per product. If you need older data, you can use the <code>/candles</code> endpoint.</p>
 
 <p>Polling this endpoint is discouraged in favor of subscribing to WebSocket events.</p>
 <h3 id='response'>Response</h3>
@@ -1308,7 +1313,7 @@
 
 <ul>
 <li><code>key</code> Your API key</li>
-<li><code>sig</code> The signed message for the <code>GET /ws-auth</code> request</li>
+<li><code>sig</code> The signed message for the <code>GET /ws-auth</code> request, with no body. See <a href="#signing-a-request">Signing a Request</a></li>
 <li><code>timestamp</code> The current time in milliseconds since UNIX epoch</li>
 </ul>
 <h1 id='sequence-numbers'>Sequence Numbers</h1>
@@ -1420,7 +1425,7 @@
     </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511434617391.877"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>A <code>cancelled</code> event indicates that your order was manually cancelled.</p>
+<p>A <code>cancelled</code> event indicates that your cancel request has been processed by the matching engine.</p>
 <h1 id='balance'>Balance</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
