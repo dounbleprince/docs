@@ -747,7 +747,6 @@
         </span><span class="s2">"fee_maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00002500"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"fee_taker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00146133"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"is_self_trade"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1511482127568.782"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -787,8 +786,6 @@
 <p>Polling this endpoint is highly discouraged.</p>
 <h3 id='response'>Response</h3>
 <p>An array of your recent fills.</p>
-
-<p><code>is_self_trade</code> is set to true if your fill results from a self-trade.</p>
 
 <p><code>is_taker</code> is set to true when your fill results in taking liquidity from the book. This field is always set to true for self-trades.</p>
 <h1 id='transactions'>Transactions</h1>
@@ -1116,8 +1113,6 @@
 
 <p>E.g. <code>/trades/ETH-BTC?limit=50&amp;timestamp=1511481127561</code>.</p>
 
-<p>This endpoint will return the latest 5,000 trades per product. If you need older data, you can use the <code>/candles</code> endpoint.</p>
-
 <p>Polling this endpoint is discouraged in favor of subscribing to WebSocket events.</p>
 <h3 id='response'>Response</h3>
 <p>An array of the latest trades.</p>
@@ -1180,7 +1175,7 @@
 <tr>
 <td>resolution</td>
 <td><em>N/A</em></td>
-<td>(required) Candle resolution to return. Can be <code>1</code>, <code>5</code>, <code>15</code>, <code>30</code>, <code>60</code>, <code>240</code>, <code>720</code>, <code>1D</code>, or <code>1W</code>.</td>
+<td>(required) Candle resolution to return. Can be <code>5</code>, <code>15</code>, <code>60</code>, <code>240</code>, or <code>1D</code>.</td>
 </tr>
 <tr>
 <td>start</td>
@@ -1196,7 +1191,7 @@
 
 <p>E.g. <code>/candles/ETH-BTC?resolution=60&amp;start=1511480127561&amp;end=1511480129513</code> fetches 1h candles between the start and end timestamps.</p>
 
-<p>A maximum of 500 candles are returned per request.</p>
+<p>A maximum of 100 candles are returned per request.</p>
 <h3 id='response'>Response</h3>
 <p>Each item in the array returned represents a candle with granularity <code>resolution</code>:</p>
 
