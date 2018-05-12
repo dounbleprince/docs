@@ -1172,7 +1172,7 @@
 </span></code></pre>
 <p>Get historical candles for a product. Candles returned are grouped by <code>resolution</code>.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><strong><code>GET /candles/:product</code></strong></p>
+<p><strong><code>GET /candles/:product/:resolution</code></strong></p>
 <h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1184,6 +1184,10 @@
 <td>product</td>
 <td>A valid product</td>
 </tr>
+<tr>
+<td>resolution</td>
+<td><em>N/A</em></td>
+</tr>
 </tbody></table>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
@@ -1193,11 +1197,6 @@
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>resolution</td>
-<td><em>N/A</em></td>
-<td>(required) Candle resolution to return. Can be <code>5</code>, <code>15</code>, <code>60</code>, <code>240</code>, or <code>1D</code>.</td>
-</tr>
 <tr>
 <td>start</td>
 <td>0</td>
@@ -1210,7 +1209,7 @@
 </tr>
 </tbody></table>
 
-<p>E.g. <code>/candles/ETH-BTC?resolution=60&amp;start=1511480127561&amp;end=1511480129513</code> fetches 1h candles between the start and end timestamps.</p>
+<p>E.g. <code>/candles/ETH-BTC?start=1511480127561&amp;end=1511480129513</code> fetches 1h candles between the start and end timestamps.</p>
 
 <p>A maximum of 100 candles are returned per request.</p>
 <h3 id='response'>Response</h3>
